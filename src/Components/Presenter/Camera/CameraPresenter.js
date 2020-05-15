@@ -1,11 +1,8 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import { useUserMedia } from "../../../Hooks/useUserMedia";
-
-const CAPTURE_OPTIONS = {
-  audio: false,
-  video: { facingMode: "environment" },
-};
+import { useUserDevices } from "../../../Hooks/useUserDevices";
+import adapter from "webrtc-adapter";
 
 const Wrapper = styled.div`
   position: relative;
@@ -58,11 +55,24 @@ const Camera = styled.video`
 
 export default () => {
   const videoRef = useRef();
-  const mediaStream = useUserMedia(CAPTURE_OPTIONS);
+  // const mediaStream = useUserMedia(CAPTURE_OPTIONS);
+  const userDevices = useUserDevices();
 
+  const constraints = {
+    audio: false,
+    video: {
+      deviceId: { exact: userDevices[0] },
+    },
+  };
+  const mediaStream = useUserMedia(constraints);
   if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
     videoRef.current.srcObject = mediaStream;
   }
+
+  // if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
+  //   videoRef.current.srcObject = mediaStream;
+  //   videoRef.current.deviceId = userDevices[0];
+  // }
 
   function handleCanPlay() {
     videoRef.current.play();
@@ -73,6 +83,7 @@ export default () => {
       <CameraViewerWrapper>
         <Title>Blessed Moon</Title>
         <FaceFrame></FaceFrame>
+
         <CameraIconWrapper>Menu Here!</CameraIconWrapper>
         <Camera
           ref={videoRef}
