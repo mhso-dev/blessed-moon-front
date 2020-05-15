@@ -41,8 +41,6 @@ const CameraViewerWrapper = styled.div`
   height: 100vh;
 `;
 const Camera = styled.video`
-  min-width: 100%;
-  min-height: 100%;
   /* Center the video */
   position: absolute;
   top: 50%;
