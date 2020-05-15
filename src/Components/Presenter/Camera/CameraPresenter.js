@@ -71,6 +71,7 @@ export default () => {
 
   function handleCanPlay() {
     videoRef.current.play();
+    window.alert("play");
   }
 
   return (
