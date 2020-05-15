@@ -69,11 +69,6 @@ export default () => {
     videoRef.current.srcObject = mediaStream;
   }
 
-  // if (mediaStream && videoRef.current && !videoRef.current.srcObject) {
-  //   videoRef.current.srcObject = mediaStream;
-  //   videoRef.current.deviceId = userDevices[0];
-  // }
-
   function handleCanPlay() {
     videoRef.current.play();
   }
@@ -89,7 +84,7 @@ export default () => {
           ref={videoRef}
           onCanPlay={handleCanPlay}
           autoPlay
-          playsInline
+          playsinline
           muted
         />
       </CameraViewerWrapper>
