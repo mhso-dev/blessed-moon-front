@@ -41,6 +41,10 @@ const CameraViewerWrapper = styled.div`
   height: 100vh;
 `;
 const Camera = styled.video`
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
   /* Center the video */
   position: absolute;
   top: 50%;
@@ -67,7 +71,6 @@ export default () => {
 
   function handleCanPlay() {
     videoRef.current.play();
-    window.alert("play");
   }
 
   return (
