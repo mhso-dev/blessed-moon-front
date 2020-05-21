@@ -7,6 +7,7 @@ export function useUserDevices() {
     async function enableCameras() {
       try {
         const devices = await navigator.mediaDevices.enumerateDevices();
+
         devices.forEach((device) => {
           if (device.kind === "videoinput") {
             setCameraDevices(produce((draft) => draft.concat(device.groupId)));
@@ -14,10 +15,12 @@ export function useUserDevices() {
         });
       } catch (err) {
         // Removed for brevity
+        console.log(err);
       }
     }
 
     if (cameraDevices.length === 0) {
+      console.log("camera enable");
       enableCameras();
     } else {
       console.log("hello");
